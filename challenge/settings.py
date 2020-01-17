@@ -39,7 +39,8 @@ INSTALLED_APPS = [
 
 # LIBS
 INSTALLED_APPS += [
-    'rest_framework'
+    'rest_framework',
+    'drf_yasg'
 ]
 
 # APPS
