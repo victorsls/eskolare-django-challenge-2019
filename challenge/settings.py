@@ -37,16 +37,21 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-# LIBS
+# libs
 INSTALLED_APPS += [
     'rest_framework',
     'drf_yasg'
 ]
 
-# APPS
+# apps
 INSTALLED_APPS += [
     'challenge.core'
 ]
+
+if DEBUG:  # dev packages
+    INSTALLED_APPS += [
+        'django_extensions',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
