@@ -37,6 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+# LIBS
+INSTALLED_APPS += [
+    'rest_framework'
+]
+
 # APPS
 INSTALLED_APPS += [
     'challenge.core'
