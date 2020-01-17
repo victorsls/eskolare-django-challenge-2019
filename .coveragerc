@@ -1,0 +1,7 @@
+[run]
+source = challenge
+omit =
+    '*/migrations/*.py'
+    wsgi.py
+    asgi.py
+    venv/*
