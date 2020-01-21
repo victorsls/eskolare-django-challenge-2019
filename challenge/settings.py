@@ -42,12 +42,14 @@ INSTALLED_APPS = [
 # libs
 INSTALLED_APPS += [
     'rest_framework',
-    'drf_yasg'
+    'drf_yasg',
+    'rest_registration'
 ]
 
 # apps
 INSTALLED_APPS += [
-    'challenge.core'
+    'challenge.core',
+    'challenge.book'
 ]
 
 if DEBUG:  # dev packages
@@ -70,7 +72,7 @@ ROOT_URLCONF = 'challenge.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -116,9 +118,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -130,6 +132,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'staticfiles/'
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
@@ -153,4 +156,17 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}
+
+REST_REGISTRATION = {
+    'REGISTER_VERIFICATION_ENABLED': True,
+    'RESET_PASSWORD_VERIFICATION_ENABLED': True,
+    'REGISTER_VERIFICATION_URL': 'localhost:8000/verify-user/',
+    'RESET_PASSWORD_VERIFICATION_URL': 'localhost:8000/reset-password/',
+    'REGISTER_EMAIL_VERIFICATION_URL': 'localhost:8000/verify-email/',
+    'VERIFICATION_FROM_EMAIL': 'no-reply@example.com',
+    'REGISTER_VERIFICATION_EMAIL_TEMPLATES': {
+        'subject': f'{BASE_DIR}/templates/email/register/subject.txt',
+        'html_body': f'{BASE_DIR}/templates/email/register/body.html'
+    }
 }
