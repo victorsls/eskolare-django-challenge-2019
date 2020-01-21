@@ -7,4 +7,5 @@ django-rest-registration==0.5.3
 djangorestframework==3.11.0
 djangorestframework-simplejwt==4.4.0
 drf-yasg==1.17.0
+psycopg2==2.8.4
 python-decouple==3.3
