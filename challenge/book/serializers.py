@@ -6,22 +6,22 @@ from challenge.book.models import Book, Category, Author, Review
 class BookSerializer(ModelSerializer):
     class Meta:
         model = Book
-        fields = '__all__'
+        fields = ('id', 'name', 'category', 'author')
 
 
 class CategorySerializer(ModelSerializer):
     class Meta:
         model = Category
-        fields = '__all__'
+        fields = ('id', 'name')
 
 
 class AuthorSerializer(ModelSerializer):
     class Meta:
         model = Author
-        fields = '__all__'
+        fields = ('id', 'name')
 
 
 class ReviewSerializer(ModelSerializer):
     class Meta:
         model = Review
-        fields = '__all__'
+        fields = ('evaluation', 'book', 'user')
