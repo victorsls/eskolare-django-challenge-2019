@@ -93,13 +93,6 @@ WSGI_APPLICATION = 'challenge.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-DATABASES = {
     'default': config(
         'DATABASE_URL',
         default='sqlite:///db.sqlite3',
@@ -168,16 +161,18 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
 
+DOMAIN = config('DOMAIN', default='localhost:8000')
+
 REST_REGISTRATION = {
     'REGISTER_VERIFICATION_ENABLED': True,
     'RESET_PASSWORD_VERIFICATION_ENABLED': True,
-    'REGISTER_VERIFICATION_URL': 'localhost:8000/verify-user/',
-    'RESET_PASSWORD_VERIFICATION_URL': 'localhost:8000/reset-password/',
-    'REGISTER_EMAIL_VERIFICATION_URL': 'localhost:8000/verify-email/',
-    'VERIFICATION_FROM_EMAIL': 'no-reply@example.com',
+    'REGISTER_VERIFICATION_URL': f'{DOMAIN}/verify-user/',
+    'RESET_PASSWORD_VERIFICATION_URL': f'{DOMAIN}/reset-password/',
+    'REGISTER_EMAIL_VERIFICATION_URL': f'{DOMAIN}/verify-email/',
+    'VERIFICATION_FROM_EMAIL': 'no-reply@eskolare.challenge',
     'REGISTER_VERIFICATION_EMAIL_TEMPLATES': {
         'subject': f'{BASE_DIR}/templates/email/register/subject.txt',
-        'html_body': f'{BASE_DIR}/templates/email/register/body.html'
+        'html_body': f'{BASE_DIR}/templates/email/register/body.html',
     }
 }
 

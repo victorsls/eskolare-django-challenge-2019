@@ -1,3 +1,0 @@
-Verifique sua conta clicando neste link:
-
-{{ verification_url | safe }}
