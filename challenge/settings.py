@@ -11,9 +11,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from datetime import timedelta
+
+from decouple import config, Csv
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -21,12 +22,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'tq)l$d=n09fjf6reqd0j(js(1dusl8e)lq!1v55+p&7ptk3875'
+SECRET_KEY = config('SECRET_KEY', default='tq)l$d=n09fjf6reqd0j(js(1dusl8e)lq!1v55+p&7ptk3875')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # Application definition
 
@@ -132,7 +133,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = 'staticfiles/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
@@ -170,3 +171,10 @@ REST_REGISTRATION = {
         'html_body': f'{BASE_DIR}/templates/email/register/body.html'
     }
 }
+
+# E-mail
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = config('EMAIL_PORT')
